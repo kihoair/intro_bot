@@ -5,29 +5,33 @@ from webscrape import webscrape
 import datetime
 import time
 import urllib3
+import os
 
-CK = process.env['CK']
-CS = process.env['CS']
-AT = process.env['AT']
-AS = process.env['AS']
+CK = os.environ['CK']
+CS = os.environ['CS']
+AT = os.environ['AT']
+AS = os.environ['AS']
 
 URL = 'https://api.twitter.com/1.1/statuses/update.json'
 
 def my_handler(event, context):
-
     hosts=webscrape()
 
-    if hosts == 'bartime':
+    if hosts == "bartime":
         tweet = get_date() + "(" + get_day() + ")はバータイム営業です。"
-    if hosts == 'specialday':
+    elif hosts == 'specialday':
         tweet = get_date() + "(" + get_day() + ")は特別営業の日です。\n詳しくはHPをご確認ください。\nhttps://www.cafecottonclub.com/jazz/"
     else:
         tweet = get_date() + "(" + get_day() + ")のジャムセッションホストは\n" + hosts + "です。"
-
-    session = OAuth1Session(CK, CS, AT, AS)
-
+    
     params = {"status": tweet }
-    session.post(URL, params = params)
+    twitter = OAuth1Session(CK, CS, AT, AS)
+    req = twitter.post(URL, params = params)
+
+    if req.status_code == 200:
+        return tweet
+    else:
+        return req.status_code
 
 def get_day():
     w_n = datetime.datetime.today().weekday()
@@ -46,3 +50,4 @@ def get_date():
         days = datetime.datetime.today().strftime('%d')
 
     return month + "月" + days + "日"
+ 
