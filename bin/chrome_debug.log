@@ -1,0 +1,9 @@
+[1103/043405.581138:WARNING:resource_bundle.cc(368)] locale_file_path.empty() for locale 
+[1103/043405.603757:WARNING:resource_bundle.cc(368)] locale_file_path.empty() for locale 
+[1103/043405.610208:ERROR:instance.cc(49)] Unable to locate service manifest for metrics
+[1103/043405.610228:ERROR:service_manager.cc(890)] Failed to resolve service name: metrics
+[1103/043405.612677:ERROR:gl_implementation.cc(292)] Failed to load /home/ec2-user/environment/headless_scraping/bin/libosmesa.so: /home/ec2-user/environment/headless_scraping/bin/libosmesa.so: cannot open shared object file: No such file or directory
+[1103/043405.636712:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[1103/043405.893403:ERROR:gpu_command_buffer_stub.cc(611)] ContextResult::kFatalFailure: Failed to create default offscreen surface.
+[1103/043405.893740:ERROR:gpu_process_transport_factory.cc(1009)] Lost UI shared context.
+[1103/043405.906106:ERROR:gpu_command_buffer_stub.cc(611)] ContextResult::kFatalFailure: Failed to create default offscreen surface.
