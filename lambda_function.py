@@ -21,6 +21,12 @@ def my_handler(event, context):
         tweet = get_date() + "(" + get_day() + ")はバータイム営業です。"
     elif hosts == 'specialday':
         tweet = get_date() + "(" + get_day() + ")は特別営業の日です。\n詳しくはHPをご確認ください。\nhttps://www.cafecottonclub.com/jazz/"
+    elif get_day() == '金':
+        tweet = get_date() + "(" + get_day() + ")の深夜ジャムセッションホストは\n" + hosts + "です。"
+    elif get_day() == '土':
+        tweet = get_date() + "(" + get_day() + ")のオールナイトジャムセッションホストは\n" + hosts + "です。"
+    elif get_day() == '水' or get_day() == '木':
+        tweet = get_date() + "(" + get_day() + ")のオールナイトジャムセッションホストは\n" + "ゴッド井上as " + hosts + "です。"
     else:
         tweet = get_date() + "(" + get_day() + ")のジャムセッションホストは\n" + hosts + "です。"
     
@@ -50,4 +56,5 @@ def get_date():
         days = datetime.datetime.today().strftime('%d')
 
     return month + "月" + days + "日"
- 
+    
+print webscrape()

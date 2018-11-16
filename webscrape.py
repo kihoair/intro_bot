@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 import datetime
 import time
 import re
+import io
 
 def webscrape():
     # webdriver settings
@@ -100,7 +101,7 @@ def get_hosts(html):
     elif aDate.weekday() == 4:
         soup2 = re.search("(.*)：(.*)", soup2)
         results = re.search("(.*)と(.*)", soup2.group(2))
-        hosts = results.group(1) + " " + results.group(2)[:-1]
+        hosts = results.group(1) + " " + results.group(2)[:-3]
     else:
         if god_exist == True:
             soup2 = re.search("(.*)：(.*)", soup2)
