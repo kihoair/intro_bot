@@ -84,7 +84,7 @@ def get_hosts(html):
     # get selector
     selector = "#main-table > tbody > tr.{} > td.intro.{}"
     selector = selector.format(tr_class_selector,weekday)
-    
+
     soup = soup.select_one(selector)
 
     for div in soup.find_all("span", {'class':'emp'}):
@@ -115,5 +115,5 @@ def get_hosts(html):
 def get_jam():
     w_n = datetime.datetime.today().weekday()
     w_list = ['Bar Time', '火曜練習ジャム', '水曜練習ジャム', '木曜練習ジャム', 'イントロ花金ミッドナイト・セッション23時〜翌3時', '毎週土曜12時間練習ジャム', '日曜練習ジャム']
-    
+
     return w_list[w_n]

@@ -29,7 +29,7 @@ def my_handler(event, context):
         tweet = get_date() + "(" + get_day() + ")のオールナイトジャムセッションホストは\n" + "ゴッド井上as " + hosts + "です。"
     else:
         tweet = get_date() + "(" + get_day() + ")のジャムセッションホストは\n" + hosts + "です。"
-    
+
     params = {"status": tweet }
     twitter = OAuth1Session(CK, CS, AT, AS)
     req = twitter.post(URL, params = params)
@@ -56,5 +56,5 @@ def get_date():
         days = datetime.datetime.today().strftime('%d')
 
     return month + "月" + days + "日"
-    
+
 print webscrape()
