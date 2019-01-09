@@ -26,7 +26,7 @@ def my_handler(event, context):
     elif get_day() == '土':
         tweet = get_date() + "(" + get_day() + ")のオールナイトジャムセッションホストは\n" + hosts + "です。"
     elif get_day() == '水' or get_day() == '木':
-        tweet = get_date() + "(" + get_day() + ")のオールナイトジャムセッションホストは\n" + "ゴッド井上as " + hosts + "です。"
+        tweet = get_date() + "(" + get_day() + ")のジャムセッションホストは\n" + "ゴッド井上as " + hosts + "です。"
     else:
         tweet = get_date() + "(" + get_day() + ")のジャムセッションホストは\n" + hosts + "です。"
 
