@@ -53,9 +53,9 @@ def get_tr_class_selector(day):
     date = month + "-" + days
 
     # odd and even are reversed, but the website is incorrect so this swapping is correct.
-    if int(date[3:])%2 == 0:
+    if int(days)%2 == 0:
         comment="odd"
-    elif int(date[3:])%2 == 1:
+    elif int(days)%2 == 1:
         comment="even"
     tr_class_selector = 'day-' + date + '.' + comment
 
