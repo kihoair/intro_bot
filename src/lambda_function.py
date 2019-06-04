@@ -15,24 +15,24 @@ AS = os.environ['AS']
 URL = 'https://api.twitter.com/1.1/statuses/update.json'
 
 def my_handler(event, context):
-    hosts=webscrape()
+    musicians_name = webscrape()
 
-    if hosts == "bartime":
+    if musicians_name == "bartime":
         tweet = get_date() + "(" + get_day() + ")はバータイム営業です。"
-    elif hosts == 'specialday':
+    elif musicians_name == 'specialday':
         tweet = get_date() + "(" + get_day() + ")は特別営業の日です。\n詳しくはHPをご確認ください。\nhttps://www.cafecottonclub.com/jazz/"
     elif get_day() == '金':
-        tweet = get_date() + "(" + get_day() + ")の深夜ジャムセッションホストは\n" + hosts + "です。"
+        tweet = get_date() + "(" + get_day() + ")の深夜ジャムセッションホストは\n" + musicians_name + "です。"
     elif get_day() == '土':
-        tweet = get_date() + "(" + get_day() + ")のオールナイトジャムセッションホストは\n" + hosts + "です。"
+        tweet = get_date() + "(" + get_day() + ")のオールナイトジャムセッションホストは\n" + musicians_name + "です。"
     elif get_day() == '水' or get_day() == '木':
-        tweet = get_date() + "(" + get_day() + ")のジャムセッションホストは\n" + "ゴッド井上as " + hosts + "です。"
+        tweet = get_date() + "(" + get_day() + ")のジャムセッションホストは\n" + "ゴッド井上as " + musicians_name + "です。"
     else:
-        tweet = get_date() + "(" + get_day() + ")のジャムセッションホストは\n" + hosts + "です。"
+        tweet = get_date() + "(" + get_day() + ")のジャムセッションホストは\n" + musicians_name + "です。"
 
-    params = {"status": tweet }
+    params = {"status": tweet}
     twitter = OAuth1Session(CK, CS, AT, AS)
-    req = twitter.post(URL, params = params)
+    req = twitter.post(URL, params=params)
 
     if req.status_code == 200:
         return tweet
@@ -57,4 +57,4 @@ def get_date():
 
     return month + "月" + days + "日"
 
-print webscrape()
+print(webscrape())
