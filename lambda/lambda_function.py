@@ -38,8 +38,10 @@ def my_handler(event, context):
     req = twitter.post(URL, params=params)
 
     if req.status_code == 200:
+        print(tweet)
         return tweet
     else:
+        print(req.status_code)
         return req.status_code
 
 def get_day():
