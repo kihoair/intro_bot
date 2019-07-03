@@ -1,0 +1,19 @@
+service: webscraping-with-selenium
+
+provider:
+  name: aws
+  runtime: python3.6
+  stage: dev
+  region: ap-northeast-1
+  timeout: 900
+  environment:
+    SELENIUM_LAYER_SERVICE: selenium-layer
+
+functions:
+  introTweetBot:
+    handler: lambda_function.my_handler
+    events:
+      - schedule: cron(0 9 * * ? *)
+    layers:
+      - ${cf:${self:provider.environment.SELENIUM_LAYER_SERVICE}-${opt:stage, self:provider.stage}.SeleniumLayerExport}
+      - ${cf:${self:provider.environment.SELENIUM_LAYER_SERVICE}-${opt:stage, self:provider.stage}.ChromedriverLayerExport}
