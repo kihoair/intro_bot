@@ -58,7 +58,7 @@ def get_tr_class_selector(day):
 
     return tr_class_selector
 
-def get_god_exist(day):
+def is_got_exist(day):
 
     if day< 4:
         god_exist = False
@@ -69,48 +69,62 @@ def get_god_exist(day):
 
     return god_exist
 
-def get_hosts(html):
-
-    soup = BeautifulSoup(html, "html.parser")
-    aDate = datetime.datetime.today()
-    weekday_number = aDate.weekday()
-
-    tr_class_selector = get_tr_class_selector(aDate)
-    weekday = get_weekday(weekday_number)
-    god_exist = get_god_exist(weekday_number)
-
-    # get selector
+def get_selector(tr_class_selector, td_class_selector):
     selector = "#main-table > tbody > tr.{} > td.intro.{}"
-    selector = selector.format(tr_class_selector,weekday)
-
-    soup = soup.select_one(selector)
-
-    for div in soup.find_all("span", {'class':'emp'}):
-        if div.text != get_jam(weekday_number):
-            return "specialday"
-        div.decompose()
-    for div in soup.find_all("span", {'class':'red small'}):
-        div.decompose()
-
-    soup2 = soup.text
-
-    if weekday_number == 0:
-        hosts = "bartime"
-    elif weekday_number == 4:
-        soup2 = re.search("(.*)：(.*)", soup2)
-        results = re.search("ゴッド井上asと(.*)／", soup2.group(2))
-        hosts = "ゴッド井上as " + results.group(1)
-    else:
-        if god_exist == True:
-            soup2 = re.search("(.*)：(.*)", soup2)
-            results = re.search("(.*)と(.*)",soup2.group(2))
-        elif god_exist == False:
-            results = re.search("(.*)と(.*)",soup2)
-        hosts = results.group(1)
-
-    return hosts
+    formated_selector = selector.format(tr_class_selector, td_class_selector)
+    
+    return formated_selector
 
 def get_jam(weekday_number):
     w_list = ['Bar Time', '火曜練習ジャム', '水曜練習ジャム', '木曜練習ジャム', 'イントロ花金ミッドナイト・セッション23時〜翌3時', '毎週土曜12時間練習ジャム', '日曜練習ジャム']
 
     return w_list[weekday_number]
+
+def extract_jam_desc_text(intro_one_day_html, weekday_number):
+    # remove today's jam session title
+    for div in intro_one_day_html.find_all("span", {'class':'emp'}):
+        if div.text != get_jam(weekday_number):
+            return "specialday"
+        div.decompose()
+    for div in intro_one_day_html.find_all("span", {'class':'red small'}):
+        div.decompose()
+        
+    return intro_one_day_html.text
+
+def format_hosts_name(jam_desc_text, weekday_number, god_exist):
+    if weekday_number == 0:
+        hosts = "bartime"
+    elif weekday_number == 4:
+        jam_desc_text = re.search("(.*)：(.*)", jam_desc_text)
+        friday_host = re.search("ゴッド井上asと(.*)／", jam_desc_text.group(2))
+        hosts = "ゴッド井上as " + friday_host.group(1)
+    else:
+        if god_exist == True:
+            jam_desc_text = re.search("(.*)：(.*)", jam_desc_text)
+            results = re.search("(.*)と(.*)",jam_desc_text.group(2))
+        elif god_exist == False:
+            results = re.search("(.*)と(.*)",jam_desc_text)
+        hosts = results.group(1)
+    
+    return hosts
+
+def get_hosts(html):
+    parsed_html = BeautifulSoup(html, "html.parser")
+    aDate = datetime.datetime.today()
+    weekday_number = aDate.weekday()
+
+    tr_class_selector = get_tr_class_selector(aDate)
+    td_class_selector = get_weekday(weekday_number)
+    god_exist = is_got_exist(weekday_number)
+
+    selector = get_selector(tr_class_selector, td_class_selector)
+    intro_one_day_html = parsed_html.select_one(selector)
+    jam_desc_text = extract_jam_desc_text(intro_one_day_html, weekday_number)
+    
+    if jam_desc_text == "specialday":
+        return "specialday"
+    
+    formated_hosts = format_hosts_name(jam_desc_text, weekday_number, god_exist)
+
+    return formated_hosts
+

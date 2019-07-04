@@ -105,7 +105,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/webscraping-with-selenium/dev/1562143922294-2019-07-03T08:52:02.294Z/webscraping-with-selenium.zip"
+          "S3Key": "serverless/webscraping-with-selenium/dev/1562145677419-2019-07-03T09:21:17.419Z/webscraping-with-selenium.zip"
         },
         "FunctionName": "webscraping-with-selenium-dev-introTweetBot",
         "Handler": "lambda_function.my_handler",
@@ -133,14 +133,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "IntroTweetBotLambdaVersionc7N6QSGoGyQ8tyRyGnSOdCnKimWANVwimzjBhMvigvI": {
+    "IntroTweetBotLambdaVersionNd09Be05OcklMzn3uDnjf34S9ks5L4FLMY0CfThD8": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "IntroTweetBotLambdaFunction"
         },
-        "CodeSha256": "o8YoCiG7Mb0jF594s3AerKrrAESCj3L1f5J/+HRHKWc="
+        "CodeSha256": "kM3/4a1mn3o9v9GrSsmOzrx8F/JITEZAYGxsLQJ8vbk="
       }
     },
     "IntroTweetBotEventsRuleSchedule1": {
@@ -190,7 +190,7 @@
     "IntroTweetBotLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "IntroTweetBotLambdaVersionc7N6QSGoGyQ8tyRyGnSOdCnKimWANVwimzjBhMvigvI"
+        "Ref": "IntroTweetBotLambdaVersionNd09Be05OcklMzn3uDnjf34S9ks5L4FLMY0CfThD8"
       }
     }
   }
