@@ -123,7 +123,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/webscraping-with-selenium/dev/1562145677419-2019-07-03T09:21:17.419Z/webscraping-with-selenium.zip"
+                "S3Key": "serverless/webscraping-with-selenium/dev/1562205049628-2019-07-04T01:50:49.628Z/webscraping-with-selenium.zip"
               },
               "FunctionName": "webscraping-with-selenium-dev-introTweetBot",
               "Handler": "lambda_function.my_handler",
@@ -151,14 +151,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "IntroTweetBotLambdaVersionNd09Be05OcklMzn3uDnjf34S9ks5L4FLMY0CfThD8": {
+          "IntroTweetBotLambdaVersionGTELJTf9RE3vqY0W9fqonaT5V24qfl6YdxhRAiuS88": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "IntroTweetBotLambdaFunction"
               },
-              "CodeSha256": "kM3/4a1mn3o9v9GrSsmOzrx8F/JITEZAYGxsLQJ8vbk="
+              "CodeSha256": "GD4+hRV0TqWbVryaFzBzpEL5b3ZiZkjzFHI1W+PAQ4Y="
             }
           },
           "IntroTweetBotEventsRuleSchedule1": {
@@ -208,7 +208,7 @@
           "IntroTweetBotLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "IntroTweetBotLambdaVersionNd09Be05OcklMzn3uDnjf34S9ks5L4FLMY0CfThD8"
+              "Ref": "IntroTweetBotLambdaVersionGTELJTf9RE3vqY0W9fqonaT5V24qfl6YdxhRAiuS88"
             }
           }
         }
@@ -268,7 +268,7 @@
     "artifact": "/home/ec2-user/environment/intro_bot/lambda/.serverless/webscraping-with-selenium.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/webscraping-with-selenium/dev/1562145677419-2019-07-03T09:21:17.419Z",
+    "artifactDirectoryName": "serverless/webscraping-with-selenium/dev/1562205049628-2019-07-04T01:50:49.628Z",
     "artifact": "webscraping-with-selenium.zip"
   }
 }

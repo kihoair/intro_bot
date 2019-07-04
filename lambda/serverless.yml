@@ -11,6 +11,8 @@ provider:
 
 functions:
   introTweetBot:
+    memorySize: 512
+    timeout: 15 
     handler: lambda_function.my_handler
     events:
       - schedule: cron(0 9 * * ? *)
