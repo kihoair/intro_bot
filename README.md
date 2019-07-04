@@ -4,9 +4,9 @@ Tweet bot for everyday Intro practice jam
 # How to use
 
 ## Environment
-* node.js
+* serverless (node.js > v4)
 * your own aws account
-* awscli
+* awscli (python)
 
 ## How to deploy
 At first, deploy selenium and chromedriver as Lambda layers.
