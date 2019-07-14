@@ -1,3 +1,4 @@
 .vscode
 *.pyc
 lambda/.serverless
+selenium-layer/.serverless
