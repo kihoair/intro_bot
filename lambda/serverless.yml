@@ -12,10 +12,10 @@ provider:
 functions:
   introTweetBot:
     memorySize: 512
-    timeout: 15 
+    timeout: 15
     handler: lambda_function.my_handler
     events:
-      - schedule: cron(0 9 * * ? *)
+      - schedule: cron(0 3  * * ? *)
     layers:
       - ${cf:${self:provider.environment.SELENIUM_LAYER_SERVICE}-${opt:stage, self:provider.stage}.SeleniumLayerExport}
       - ${cf:${self:provider.environment.SELENIUM_LAYER_SERVICE}-${opt:stage, self:provider.stage}.ChromedriverLayerExport}
