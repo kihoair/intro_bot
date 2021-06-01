@@ -15,7 +15,8 @@ functions:
     timeout: 15
     handler: lambda_function.my_handler
     events:
-      - schedule: cron(0 3  * * ? *)
+      - schedule:
+          rate: cron(0 3 * * ? *)
     layers:
       - ${cf:${self:provider.environment.SELENIUM_LAYER_SERVICE}-${opt:stage, self:provider.stage}.SeleniumLayerExport}
       - ${cf:${self:provider.environment.SELENIUM_LAYER_SERVICE}-${opt:stage, self:provider.stage}.ChromedriverLayerExport}
