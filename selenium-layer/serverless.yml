@@ -2,7 +2,7 @@ service: selenium-layer
 
 provider:
   name: aws
-  runtime: python3.8
+  runtime: python3.7
   stage: dev
   region: ap-northeast-1
 
@@ -11,12 +11,12 @@ layers:
     path: selenium
     description: selenium layer
     CompatibleRuntimes: 
-      - python3.8
+      - python3.7
   chromedriver:
     path: chromedriver
     description: chrome driver layer
     CompatibleRuntimes:
-      - python3.8
+      - python3.7
 
 resources:
   Outputs:
