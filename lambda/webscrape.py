@@ -5,6 +5,10 @@ import time
 import datetime
 import re
 
+T_DELTA = datetime.timedelta(hours=9)
+JST = datetime.timezone(T_DELTA, 'JST')
+T_NOW = datetime.datetime.now(JST) # + datetime.timedelta(days = 6)
+
 def webscrape():
     options = Options()
     options.binary_location = '/opt/headless-chromium'
@@ -16,7 +20,7 @@ def webscrape():
     driver = webdriver.Chrome('/opt/chromedriver', chrome_options=options)
 
     driver.get('https://www.cafecottonclub.com/jazz/')
-    time.sleep(0.6)
+    time.sleep(0.8)
     html = driver.page_source
 
     driver.close();
@@ -76,19 +80,31 @@ def get_selector(tr_class_selector, td_class_selector):
     return formated_selector
 
 def get_jam(weekday_number):
-    w_list = ['Bar Time', '火曜練習ジャム', '水曜練習ジャム', '木曜練習ジャム', 'イントロ花金ミッドナイト・セッション23時〜翌3時', '毎週土曜12時間練習ジャム', '日曜練習ジャム']
+    w_list = [
+        ['Bar Time'],
+        ['火曜練習ジャム','火曜練習ジャム15：00〜21：00'],
+        ['水曜練習ジャム','水曜練習ジャム15：00〜21：00'],
+        ['木曜練習ジャム','木曜練習ジャム15：00〜21：00'], 
+        ['イントロ花金ミッドナイト・セッション23時〜翌3時'], 
+        ['毎週土曜練習会','毎週土曜練習会15：00〜21：00'], 
+        ['日曜練習ジャム','日曜練習ジャム15：00〜21：00']
+        ]
 
     return w_list[weekday_number]
 
 def extract_jam_desc_text(intro_one_day_html, weekday_number):
     # remove today's jam session title
     for div in intro_one_day_html.find_all("span", {'class':'emp'}):
-        if div.text != get_jam(weekday_number):
+        if div.text == "イントロとゴッド井上の安息日です。":
+            return "sabbath"
+        if div.text == "ジャズの隠れた名盤を聴くバータイム(18：30〜21：00)":
+            return "bartime"
+        if div.text not in get_jam(weekday_number):
             return "specialday"
         div.decompose()
     for div in intro_one_day_html.find_all("span", {'class':'red small'}):
         div.decompose()
-        
+
     return intro_one_day_html.text
 
 def format_hosts_name(jam_desc_text, weekday_number, god_exist):
@@ -110,7 +126,7 @@ def format_hosts_name(jam_desc_text, weekday_number, god_exist):
 
 def get_hosts(html):
     parsed_html = BeautifulSoup(html, "html.parser")
-    aDate = datetime.datetime.today()
+    aDate = T_NOW
     weekday_number = aDate.weekday()
 
     tr_class_selector = get_tr_class_selector(aDate)
@@ -121,6 +137,11 @@ def get_hosts(html):
     intro_one_day_html = parsed_html.select_one(selector)
     jam_desc_text = extract_jam_desc_text(intro_one_day_html, weekday_number)
     
+
+    if jam_desc_text == "bartime":
+        return "bartime"
+    if jam_desc_text == "sabbath":
+        return "sabbath"
     if jam_desc_text == "specialday":
         return "specialday"
     
