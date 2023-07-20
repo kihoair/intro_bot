@@ -1,16 +1,17 @@
 #coding:utf-8
 
-from requests_oauthlib import OAuth1Session
 from webscrape import webscrape
 import datetime
 import time
 import urllib3
 import os
+import tweepy
 
-CK = os.environ['CK']
-CS = os.environ['CS']
-AT = os.environ['AT']
-AS = os.environ['AS']
+BEARER_TOKEN = os.environ['BEARER_TOKEN']
+API_KEY = os.environ['API_KEY']
+API_KEY_SECRET = os.environ['API_KEY_SECRET']
+CLIENT_ID = os.environ['CLIENT_ID']
+CLIENT_SECRET = os.environ['CLIENT_SECRET']
 
 URL = 'https://api.twitter.com/1.1/statuses/update.json'
 
@@ -43,15 +44,15 @@ def my_handler(event, context):
     print("---TWEET---")
     print(tweet)
     params = {"status": tweet}
-    twitter = OAuth1Session(CK, CS, AT, AS)
-    req = twitter.post(URL, params=params)
 
-    if req.status_code == 200:
-        print(tweet)
-        return tweet
-    else:
-        print(req.status_code)
-        return req.status_code
+    client = tweepy.Client(
+        bearer_token= BEARER_TOKEN,
+        consumer_key= API_KEY,
+        consumer_secret= API_KEY_SECRET ,
+        access_token= CLIENT_ID ,
+        access_token_secret= CLIENT_SECRET
+        )
+    client.create_tweet(text=tweet)
 
 def get_day():
     t_now = T_NOW
