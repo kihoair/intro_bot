@@ -10,8 +10,8 @@ import tweepy
 BEARER_TOKEN = os.environ['BEARER_TOKEN']
 API_KEY = os.environ['API_KEY']
 API_KEY_SECRET = os.environ['API_KEY_SECRET']
-CLIENT_ID = os.environ['CLIENT_ID']
-CLIENT_SECRET = os.environ['CLIENT_SECRET']
+ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
+ACCESS_TOKEN_SECRET = os.environ['ACCESS_TOKEN_SECRET']
 
 T_DELTA = datetime.timedelta(hours=9)
 JST = datetime.timezone(T_DELTA, 'JST')
@@ -47,8 +47,8 @@ def my_handler(event, context):
         bearer_token= BEARER_TOKEN,
         consumer_key= API_KEY,
         consumer_secret= API_KEY_SECRET ,
-        access_token= CLIENT_ID ,
-        access_token_secret= CLIENT_SECRET
+        access_token= ACCESS_TOKEN ,
+        access_token_secret= ACCESS_TOKEN_SECRET
         )
     client.create_tweet(text=tweet)
 
