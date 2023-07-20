@@ -13,8 +13,6 @@ API_KEY_SECRET = os.environ['API_KEY_SECRET']
 CLIENT_ID = os.environ['CLIENT_ID']
 CLIENT_SECRET = os.environ['CLIENT_SECRET']
 
-URL = 'https://api.twitter.com/1.1/statuses/update.json'
-
 T_DELTA = datetime.timedelta(hours=9)
 JST = datetime.timezone(T_DELTA, 'JST')
 T_NOW = datetime.datetime.now(JST) #+ datetime.timedelta(days = 6)
@@ -30,7 +28,7 @@ def my_handler(event, context):
     if musicians_name == "bartime":
         tweet = tweet_date_part + "はバータイム営業です"
     elif musicians_name == 'sabbath':
-        tweet = tweet_date_part + "はイントロとゴッド井上の安息日です。" 
+        tweet = tweet_date_part + "はイントロとゴッド井上の安息日です。"
     elif musicians_name == 'specialday':
         tweet = tweet_date_part + "は特別営業の日です。\n詳しくはHPをご確認ください。\nhttps://www.cafecottonclub.com/jazz/"
     elif get_day() == '金':
@@ -62,7 +60,7 @@ def get_day():
 
 def get_date():
     t_now = T_NOW
-    
+
     if t_now.strftime('%m')[0] == "0":
         month = t_now.strftime('%m')[1]
     else:
