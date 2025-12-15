@@ -1,0 +1,21 @@
+.vscode
+*.pyc
+__pycache__/
+.DS_Store
+
+# Serverless
+lambda/.serverless
+selenium-layer/.serverless
+.serverless/
+node_modules/
+
+# Python packages (installed via serverless-python-requirements)
+.requirements/
+.requirements.zip
+
+# Selenium/Chrome layer (download separately for deployment)
+selenium-layer/layer/
+*.zip
+
+# Environment
+.env

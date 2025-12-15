@@ -1,0 +1,18 @@
+{
+  "name": "intro-tweet-bot",
+  "version": "1.0.0",
+  "description": "Tweet bot for everyday Intro practice jam",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test_local.js"
+  },
+  "dependencies": {
+    "@sparticuz/chromium": "^131.0.0",
+    "puppeteer-core": "^23.0.0",
+    "twitter-api-v2": "^1.17.0"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=24.0.0"
+  }
+}
