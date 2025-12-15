@@ -2,11 +2,12 @@ service: intro-tweet-bot
 
 provider:
   name: aws
-  runtime: nodejs24.x
+  runtime: nodejs20.x
   stage: dev
   region: ap-northeast-1
   timeout: 900
   memorySize: 1024
+  architecture: x86_64
   environment:
     DEBUG_MODE: ${env:DEBUG_MODE, 'false'}
     DEBUG_DATE: ${env:DEBUG_DATE, ''}
@@ -24,6 +25,8 @@ functions:
     memorySize: 1024
     timeout: 60
     handler: index.handler
+    layers:
+      - arn:aws:lambda:ap-northeast-1:764866452798:layer:chrome-aws-lambda:47
     events:
       - schedule:
           rate: cron(0 3 * * ? *)

@@ -1,5 +1,12 @@
-const chromium = require('@sparticuz/chromium');
 const puppeteer = require('puppeteer-core');
+
+// Try to load chromium from layer or npm package
+let chromium;
+try {
+  chromium = require('chrome-aws-lambda');
+} catch {
+  chromium = require('@sparticuz/chromium');
+}
 
 // JST timezone offset (UTC+9)
 const JST_OFFSET = 9 * 60 * 60 * 1000;
@@ -181,11 +188,16 @@ async function webscrape() {
 
   debugLog(`Starting webscrape for date: ${formatDate(targetDate)}`);
 
+  // chrome-aws-lambda uses executablePath as property, @sparticuz/chromium uses it as function
+  const execPath = typeof chromium.executablePath === 'function'
+    ? await chromium.executablePath()
+    : await chromium.executablePath;
+
   const browser = await puppeteer.launch({
     args: chromium.args,
     defaultViewport: chromium.defaultViewport,
-    executablePath: await chromium.executablePath(),
-    headless: chromium.headless,
+    executablePath: execPath,
+    headless: chromium.headless ?? true,
   });
 
   try {

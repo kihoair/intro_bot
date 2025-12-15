@@ -2,10 +2,16 @@
 Tweet bot for everyday Intro practice jam
 
 ## Environment
-* serverless (node.js)
+* Serverless Framework v3.30+ or v4.x
 * AWS account
 * awscli
-* Node.js 24.x
+* Node.js 20.x (Lambda runtime)
+
+### Install Serverless Framework
+```bash
+npm install -g serverless
+sls --version  # Verify installation
+```
 
 ## How to deploy (Node.js version)
 
@@ -23,11 +29,10 @@ sls deploy
 
 ### 3. Configure Environment Variables
 AWS Console > Lambda > introTweetBot > Configuration > Environment variables:
-- `BEARER_TOKEN`
-- `API_KEY`
-- `API_KEY_SECRET`
-- `ACCESS_TOKEN`
-- `ACCESS_TOKEN_SECRET`
+- `API_KEY` - Twitter API Consumer Key
+- `API_KEY_SECRET` - Twitter API Consumer Secret
+- `ACCESS_TOKEN` - Twitter Access Token
+- `ACCESS_TOKEN_SECRET` - Twitter Access Token Secret
 
 ## Testing
 
